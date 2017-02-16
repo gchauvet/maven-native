@@ -43,6 +43,9 @@ public class ResourceCompilerConfiguration
 
     private File workingDirectory;
 
+    /**
+     * @parameter default-value="${project.build.directory}/c-objects"
+     */
     private File outputDirectory;
 
     private File debugOutputDirectory;

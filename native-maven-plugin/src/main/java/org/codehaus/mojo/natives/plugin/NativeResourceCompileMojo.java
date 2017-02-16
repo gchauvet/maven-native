@@ -97,10 +97,15 @@ public class NativeResourceCompileMojo
     public void execute()
         throws MojoExecutionException
     {
-
-        if ( !this.resourceCompilerOutputDirectory.exists() )
+        File outputDir = resourceCompilerOutputDirectory;
+        
+        if(classifier != null) {
+            outputDir = new File(outputDir, classifier);
+        }
+        
+        if ( !outputDir.exists() )
         {
-            this.resourceCompilerOutputDirectory.mkdirs();
+            outputDir.mkdirs();
         }
 
         FileUtils.mkdir( project.getBuild().getDirectory() );
@@ -111,7 +116,7 @@ public class NativeResourceCompileMojo
         config.setExecutable( this.resourceCompilerExecutable );
         config.setWorkingDirectory( this.workingDirectory );
         config.setOptions( NativeMojoUtils.trimParams( this.resourceCompilerOptions ) );
-        config.setOutputDirectory( this.resourceCompilerOutputDirectory );
+        config.setOutputDirectory( outputDir );
         config.setEnvFactory( this.getEnvFactory() );
 
         try

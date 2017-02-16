@@ -38,15 +38,15 @@ import org.codehaus.mojo.natives.manager.EnvFactoryManager;
 public abstract class AbstractNativeMojo
     extends AbstractMojo
 {
-    public static final String LINKER_INPUT_LIST_NAME = "NativeLinkerInputListName";
+    protected static final String LINKER_INPUT_LIST_NAME = "NativeLinkerInputListName";
 
-    public static final String LINKER_OUTPUT_PATH = "NativeLinkerOutputPath";
+    protected static final String LINKER_OUTPUT_PATH = "NativeLinkerOutputPath";
 
-    public static final String INCZIP_FOUND = "IncZipFound";
+    protected static final String INCZIP_FOUND = "IncZipFound";
 
-    public static final String INCZIP_TYPE = "inczip";
+    protected static final String INCZIP_TYPE = "inczip";
 
-    protected static final List EMPTY_FILE_LIST = new ArrayList();
+    protected final List EMPTY_FILE_LIST = new ArrayList();
 
     /**
      * POM

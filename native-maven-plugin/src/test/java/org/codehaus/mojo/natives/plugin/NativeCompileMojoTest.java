@@ -45,7 +45,7 @@ public class NativeCompileMojoTest
 
         assertEquals( "someExe", config.getExecutable() );
 
-        assertEquals( new File( "target" ), config.getOutputDirectory() );
+        assertEquals( new File("target"), config.getOutputDirectory() );
 
         assertEquals( 4, config.getStartOptions().length );
         assertEquals( "-s0", config.getStartOptions()[0] );

@@ -201,11 +201,6 @@ public class NativeLinkMojo
         throws MojoExecutionException
     {
 
-        if ( StringUtils.isEmpty( this.classifier ) )
-        {
-            this.classifier = null;
-        }
-
         Linker linker = this.getLinker();
 
         this.config = this.createLinkerConfiguration();
@@ -217,7 +212,7 @@ public class NativeLinkMojo
             File outputFile = linker.link( config, allCompilerOuputFiles );
 
             // to be used by post linker mojo like native:manifest
-            this.getPluginContext().put( AbstractNativeMojo.LINKER_OUTPUT_PATH, outputFile );
+            this.getPluginContext().put( LINKER_OUTPUT_PATH, outputFile );
 
         }
         catch ( IOException ioe )
@@ -252,7 +247,7 @@ public class NativeLinkMojo
             finalName = finalName + "-" + classifier;
         }
         config.setOutputFileName( finalName );
-        config.setOutputFileExtension(StringUtils.isEmpty(this.classifier) ? this.linkerFinalNameExt : this.classifier );
+        config.setOutputFileExtension(StringUtils.isEmpty(this.linkerFinalNameExt) ? this.project.getArtifact().getArtifactHandler().getExtension() : this.linkerFinalNameExt );
         config.setExternalLibDirectory( this.externalLibDirectory );
         config.setExternalLibFileNames( this.getLibFileNames() );
         config.setEnvFactory( this.getEnvFactory() );

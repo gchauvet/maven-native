@@ -68,7 +68,7 @@ public class NativeUnZipIncMojo
     {
         if ( unpackIncZipDepenedencies() )
         {
-            this.getPluginContext().put( AbstractNativeMojo.INCZIP_FOUND, new Boolean( "true" ) );
+            this.getPluginContext().put( INCZIP_FOUND, new Boolean( "true" ) );
         }
     }
 

@@ -222,7 +222,7 @@ public class NativeCompileMojo
     {
         List additionalIncludePaths = project.getCompileSourceRoots();
 
-        boolean includeDependencyFound = this.getPluginContext().get( AbstractNativeMojo.INCZIP_FOUND ) != null;
+        boolean includeDependencyFound = this.getPluginContext().get( INCZIP_FOUND ) != null;
 
         if ( !includeDependencyFound )
         {

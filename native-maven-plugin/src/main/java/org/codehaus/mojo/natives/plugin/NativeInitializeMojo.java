@@ -74,7 +74,5 @@ public class NativeInitializeMojo
         {
             objList.clear();
         }
-
     }
-
 }
