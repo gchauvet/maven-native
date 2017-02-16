@@ -74,7 +74,7 @@ public abstract class AbstractNativeMojo
      * @since 1.0-alpha-2
      */
     private String envFactoryName;
-
+    
     /**
      * Internal
      *
@@ -90,6 +90,14 @@ public abstract class AbstractNativeMojo
      * @parameter default-value="${project.build.directory}/native/include"
      */
     protected File dependencyIncludeDirectory;
+    
+    /**
+     * Option to define a classifier, useful to install/deploy debug artifacts
+     *
+     * @parameter
+     * @since 1.0-alpha-10
+     */
+    protected String classifier = null;
 
     protected static String[] removeEmptyOptions( List args )
     {

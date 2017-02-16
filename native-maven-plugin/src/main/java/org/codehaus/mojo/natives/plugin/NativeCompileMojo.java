@@ -33,6 +33,7 @@ import org.codehaus.mojo.natives.compiler.Compiler;
 import org.codehaus.mojo.natives.compiler.CompilerConfiguration;
 import org.codehaus.mojo.natives.manager.CompilerManager;
 import org.codehaus.mojo.natives.manager.NoSuchNativeProviderException;
+import org.codehaus.plexus.util.StringUtils;
 
 /**
  * Compile source files into native object files
@@ -125,7 +126,7 @@ public class NativeCompileMojo
     /**
      * Compiler output files ( .o, .obj, etc) location
      *
-     * @parameter default-value="${project.build.directory}/objs"
+     * @parameter default-value="${project.build.directory}/objects"
      * @required
      * @since 1.0-alpha-4
      */
@@ -279,7 +280,11 @@ public class NativeCompileMojo
         config.setEndOptions( removeEmptyOptions( this.compilerEndOptions ) );
         config.setIncludePaths( NativeSources.getIncludePaths( this.sources ) );
         config.setSystemIncludePaths( NativeSources.getSystemIncludePaths( this.sources ) );
-        config.setOutputDirectory( this.compilerOutputDirectory );
+        File outputDir = compilerOutputDirectory;
+        if(!StringUtils.isEmpty(classifier)) {
+            outputDir = new File(outputDir, classifier);
+        }
+        config.setOutputDirectory( outputDir );
         config.setObjectFileExtension( this.objectFileExtension );
         config.setEnvFactory( this.getEnvFactory() );
         config.setNumberOfConcurrentCompilation( numberOfConcurrentCompilation );

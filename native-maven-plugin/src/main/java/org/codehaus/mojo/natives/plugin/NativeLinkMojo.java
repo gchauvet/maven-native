@@ -173,14 +173,6 @@ public class NativeLinkMojo
     private File externalLibDirectory;
 
     /**
-     * Option to install primary artifact as a classifier, useful to install/deploy debug artifacts
-     *
-     * @parameter
-     * @since 1.0-alpha-2
-     */
-    private String classifier = null;
-
-    /**
      * Attach the linker's outputs to maven project be installed/deployed. Turn this off if you have other mean of
      * deployment, for example using maven-assembly-plugin to deploy your own bundle
      *
@@ -255,15 +247,12 @@ public class NativeLinkMojo
         config.setMiddleOptions( removeEmptyOptions( this.linkerMiddleOptions ) );
         config.setEndOptions( removeEmptyOptions( this.linkerEndOptions ) );
         config.setOutputDirectory( this.linkerOutputDirectory );
-        config.setOutputFileName( this.linkerFinalName );
-        if ( StringUtils.isEmpty(this.linkerFinalNameExt) )
-        {
-            config.setOutputFileExtension( this.project.getArtifact().getArtifactHandler().getExtension() );
+        String finalName = this.linkerFinalName;
+        if(classifier != null) {
+            finalName = finalName + "-" + classifier;
         }
-        else
-        {
-            config.setOutputFileExtension( this.linkerFinalNameExt );
-        }
+        config.setOutputFileName( finalName );
+        config.setOutputFileExtension(StringUtils.isEmpty(this.classifier) ? this.linkerFinalNameExt : this.classifier );
         config.setExternalLibDirectory( this.externalLibDirectory );
         config.setExternalLibFileNames( this.getLibFileNames() );
         config.setEnvFactory( this.getEnvFactory() );

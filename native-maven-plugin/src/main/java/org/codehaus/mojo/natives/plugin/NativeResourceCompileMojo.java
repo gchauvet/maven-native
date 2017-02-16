@@ -79,7 +79,7 @@ public class NativeResourceCompileMojo
     private NativeSources[] resources;
 
     /**
-     * @parameter default-value="${project.build.directory}"
+     * @parameter default-value="${project.build.directory}/objects"
      * @required
      * @since 1.0-alpha-2
      */
