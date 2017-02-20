@@ -116,7 +116,7 @@ public class NativeCompileMojo
      * Compiler output files ( .o, .obj, etc) location
      * @since 1.0-alpha-4
      */
-    @Parameter(defaultValue="${project.build.directory}/objs", required = true)
+    @Parameter(defaultValue="${project.build.directory}/objects", required = true)
     protected File compilerOutputDirectory;
 
     /**

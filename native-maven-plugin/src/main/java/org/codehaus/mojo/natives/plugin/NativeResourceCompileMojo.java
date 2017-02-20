@@ -76,7 +76,7 @@ public class NativeResourceCompileMojo
     /**
      * @since 1.0-alpha-2
      */
-    @Parameter(defaultValue = "${project.build.directory}", required = true)
+    @Parameter(defaultValue = "${project.build.directory}/resources", required = true)
     protected File resourceCompilerOutputDirectory;
 
     /**

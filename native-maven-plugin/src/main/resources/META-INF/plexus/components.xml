@@ -21,23 +21,6 @@ limitations under the License.
             <role>org.apache.maven.lifecycle.mapping.LifecycleMapping</role>
             <role-hint>lib</role-hint>
             <implementation>org.apache.maven.lifecycle.mapping.DefaultLifecycleMapping</implementation>
-            <configuration>
-                <phases>
-                    <initialize>org.codehaus.mojo:native-maven-plugin:initialize</initialize>
-                    <generate-sources>org.codehaus.mojo:native-maven-plugin:unzipinc</generate-sources>
-                    <process-sources></process-sources>
-                    <compile>
-                        org.codehaus.mojo:native-maven-plugin:compile,
-                        org.codehaus.mojo:native-maven-plugin:link
-                    </compile>
-                    <process-test-resources>org.apache.maven.plugins:maven-resources-plugin:testResources</process-test-resources>
-                    <test-compile>org.apache.maven.plugins:maven-compiler-plugin:testCompile</test-compile>
-                    <test>org.apache.maven.plugins:maven-surefire-plugin:test</test>
-                    <package>org.codehaus.mojo:native-maven-plugin:inczip</package>
-                    <install>org.apache.maven.plugins:maven-install-plugin:install</install>
-                    <deploy>org.apache.maven.plugins:maven-deploy-plugin:deploy</deploy>
-                </phases>
-            </configuration>
         </component>
 
         <component>
@@ -56,28 +39,6 @@ limitations under the License.
             <role>org.apache.maven.lifecycle.mapping.LifecycleMapping</role>
             <role-hint>dll</role-hint>
             <implementation>org.apache.maven.lifecycle.mapping.DefaultLifecycleMapping</implementation>
-            <configuration>
-                <phases>
-                    <initialize>org.codehaus.mojo:native-maven-plugin:initialize</initialize>
-                    <generate-sources>
-                        org.codehaus.mojo:native-maven-plugin:unzipinc,
-                        org.codehaus.mojo:native-maven-plugin:javah
-                    </generate-sources>
-                    <process-sources></process-sources>
-                    <compile>
-                        org.codehaus.mojo:native-maven-plugin:resource-compile,
-                        org.codehaus.mojo:native-maven-plugin:compile,
-                        org.codehaus.mojo:native-maven-plugin:link,
-                        org.codehaus.mojo:native-maven-plugin:manifest
-                    </compile>
-                    <process-test-resources>org.apache.maven.plugins:maven-resources-plugin:testResources</process-test-resources>
-                    <test-compile>org.apache.maven.plugins:maven-compiler-plugin:testCompile</test-compile>
-                    <test>org.apache.maven.plugins:maven-surefire-plugin:test</test>
-                    <package>org.codehaus.mojo:native-maven-plugin:inczip</package>
-                    <install>org.apache.maven.plugins:maven-install-plugin:install</install>
-                    <deploy>org.apache.maven.plugins:maven-deploy-plugin:deploy</deploy>
-                </phases>
-            </configuration>
         </component>
 
         <component>
@@ -96,25 +57,6 @@ limitations under the License.
             <role>org.apache.maven.lifecycle.mapping.LifecycleMapping</role>
             <role-hint>exe</role-hint>
             <implementation>org.apache.maven.lifecycle.mapping.DefaultLifecycleMapping</implementation>
-            <configuration>
-                <phases>
-                    <initialize>org.codehaus.mojo:native-maven-plugin:initialize</initialize>
-                    <generate-sources>org.codehaus.mojo:native-maven-plugin:unzipinc</generate-sources>
-                    <process-sources></process-sources>
-                    <compile>
-                        org.codehaus.mojo:native-maven-plugin:resource-compile,
-                        org.codehaus.mojo:native-maven-plugin:compile,
-                        org.codehaus.mojo:native-maven-plugin:link,
-                        org.codehaus.mojo:native-maven-plugin:manifest
-                    </compile>
-                    <process-test-resources>org.apache.maven.plugins:maven-resources-plugin:testResources</process-test-resources>
-                    <test-compile>org.apache.maven.plugins:maven-compiler-plugin:testCompile</test-compile>
-                    <test>org.apache.maven.plugins:maven-surefire-plugin:test</test>
-                    <package></package>
-                    <install>org.apache.maven.plugins:maven-install-plugin:install</install>
-                    <deploy>org.apache.maven.plugins:maven-deploy-plugin:deploy</deploy>
-                </phases>
-            </configuration>
         </component>
 
         <component>
@@ -134,23 +76,6 @@ limitations under the License.
             <role>org.apache.maven.lifecycle.mapping.LifecycleMapping</role>
             <role-hint>a</role-hint>
             <implementation>org.apache.maven.lifecycle.mapping.DefaultLifecycleMapping</implementation>
-            <configuration>
-                <phases>
-                    <initialize>org.codehaus.mojo:native-maven-plugin:initialize</initialize>
-                    <generate-sources>org.codehaus.mojo:native-maven-plugin:unzipinc</generate-sources>
-                    <process-sources></process-sources>
-                    <compile>
-                        org.codehaus.mojo:native-maven-plugin:compile,
-                        org.codehaus.mojo:native-maven-plugin:link
-                    </compile>
-                    <process-test-resources>org.apache.maven.plugins:maven-resources-plugin:testResources</process-test-resources>
-                    <test-compile>org.apache.maven.plugins:maven-compiler-plugin:testCompile</test-compile>
-                    <test>org.apache.maven.plugins:maven-surefire-plugin:test</test>
-                    <package>org.codehaus.mojo:native-maven-plugin:inczip</package>
-                    <install>org.apache.maven.plugins:maven-install-plugin:install</install>
-                    <deploy>org.apache.maven.plugins:maven-deploy-plugin:deploy</deploy>
-                </phases>
-            </configuration>
         </component>
 
         <!-- | native-o, on linux one can compile multiple .o files into one -->
@@ -159,23 +84,6 @@ limitations under the License.
             <role>org.apache.maven.lifecycle.mapping.LifecycleMapping</role>
             <role-hint>o</role-hint>
             <implementation>org.apache.maven.lifecycle.mapping.DefaultLifecycleMapping</implementation>
-            <configuration>
-                <phases>
-                    <initialize>org.codehaus.mojo:native-maven-plugin:initialize</initialize>
-                    <generate-sources>org.codehaus.mojo:native-maven-plugin:unzipinc</generate-sources>
-                    <process-sources></process-sources>
-                    <compile>
-                        org.codehaus.mojo:native-maven-plugin:compile,
-                        org.codehaus.mojo:native-maven-plugin:link
-                    </compile>
-                    <process-test-resources>org.apache.maven.plugins:maven-resources-plugin:testResources</process-test-resources>
-                    <test-compile>org.apache.maven.plugins:maven-compiler-plugin:testCompile</test-compile>
-                    <test>org.apache.maven.plugins:maven-surefire-plugin:test</test>
-                    <package></package>
-                    <install>org.apache.maven.plugins:maven-install-plugin:install</install>
-                    <deploy>org.apache.maven.plugins:maven-deploy-plugin:deploy</deploy>
-                </phases>
-            </configuration>
         </component>
 
         <component>
@@ -194,26 +102,6 @@ limitations under the License.
             <role>org.apache.maven.lifecycle.mapping.LifecycleMapping</role>
             <role-hint>so</role-hint>
             <implementation>org.apache.maven.lifecycle.mapping.DefaultLifecycleMapping</implementation>
-            <configuration>
-                <phases>
-                    <initialize>org.codehaus.mojo:native-maven-plugin:initialize</initialize>
-                    <generate-sources>
-                        org.codehaus.mojo:native-maven-plugin:unzipinc,
-                        org.codehaus.mojo:native-maven-plugin:javah
-                    </generate-sources>
-                    <process-sources></process-sources>
-                    <compile>
-                        org.codehaus.mojo:native-maven-plugin:compile,
-                        org.codehaus.mojo:native-maven-plugin:link
-                    </compile>
-                    <process-test-resources>org.apache.maven.plugins:maven-resources-plugin:testResources</process-test-resources>
-                    <test-compile>org.apache.maven.plugins:maven-compiler-plugin:testCompile</test-compile>
-                    <test>org.apache.maven.plugins:maven-surefire-plugin:test</test>
-                    <package>org.codehaus.mojo:native-maven-plugin:inczip</package>
-                    <install>org.apache.maven.plugins:maven-install-plugin:install</install>
-                    <deploy>org.apache.maven.plugins:maven-deploy-plugin:deploy</deploy>
-                </phases>
-            </configuration>
         </component>
 
         <component>
@@ -233,26 +121,6 @@ limitations under the License.
             <role>org.apache.maven.lifecycle.mapping.LifecycleMapping</role>
             <role-hint>sl</role-hint>
             <implementation>org.apache.maven.lifecycle.mapping.DefaultLifecycleMapping</implementation>
-            <configuration>
-                <phases>
-                    <initialize>org.codehaus.mojo:native-maven-plugin:initialize</initialize>
-                    <generate-sources>
-                        org.codehaus.mojo:native-maven-plugin:unzipinc,
-                        org.codehaus.mojo:native-maven-plugin:javah
-                    </generate-sources>
-                    <process-sources></process-sources>
-                    <compile>
-                        org.codehaus.mojo:native-maven-plugin:compile,
-                        org.codehaus.mojo:native-maven-plugin:link
-                    </compile>
-                    <process-test-resources>org.apache.maven.plugins:maven-resources-plugin:testResources</process-test-resources>
-                    <test-compile>org.apache.maven.plugins:maven-compiler-plugin:testCompile</test-compile>
-                    <test>org.apache.maven.plugins:maven-surefire-plugin:test</test>
-                    <package>org.codehaus.mojo:native-maven-plugin:inczip</package>
-                    <install>org.apache.maven.plugins:maven-install-plugin:install</install>
-                    <deploy>org.apache.maven.plugins:maven-deploy-plugin:deploy</deploy>
-                </phases>
-            </configuration>
         </component>
 
         <component>
@@ -271,26 +139,6 @@ limitations under the License.
             <role>org.apache.maven.lifecycle.mapping.LifecycleMapping</role>
             <role-hint>dylib</role-hint>
             <implementation>org.apache.maven.lifecycle.mapping.DefaultLifecycleMapping</implementation>
-            <configuration>
-                <phases>
-                    <initialize>org.codehaus.mojo:native-maven-plugin:initialize</initialize>
-                    <generate-sources>
-                        org.codehaus.mojo:native-maven-plugin:unzipinc,
-                        org.codehaus.mojo:native-maven-plugin:javah
-                    </generate-sources>
-                    <process-sources></process-sources>
-                    <compile>
-                        org.codehaus.mojo:native-maven-plugin:compile,
-                        org.codehaus.mojo:native-maven-plugin:link
-                    </compile>
-                    <process-test-resources>org.apache.maven.plugins:maven-resources-plugin:testResources</process-test-resources>
-                    <test-compile>org.apache.maven.plugins:maven-compiler-plugin:testCompile</test-compile>
-                    <test>org.apache.maven.plugins:maven-surefire-plugin:test</test>
-                    <package>org.codehaus.mojo:native-maven-plugin:inczip</package>
-                    <install>org.apache.maven.plugins:maven-install-plugin:install</install>
-                    <deploy>org.apache.maven.plugins:maven-deploy-plugin:deploy</deploy>
-                </phases>
-            </configuration>
         </component>
 
         <component>
@@ -310,26 +158,6 @@ limitations under the License.
             <role>org.apache.maven.lifecycle.mapping.LifecycleMapping</role>
             <role-hint>jnilib</role-hint>
             <implementation>org.apache.maven.lifecycle.mapping.DefaultLifecycleMapping</implementation>
-            <configuration>
-                <phases>
-                    <initialize>org.codehaus.mojo:native-maven-plugin:initialize</initialize>
-                    <generate-sources>
-                        org.codehaus.mojo:native-maven-plugin:unzipinc,
-                        org.codehaus.mojo:native-maven-plugin:javah
-                    </generate-sources>
-                    <process-sources></process-sources>
-                    <compile>
-                        org.codehaus.mojo:native-maven-plugin:compile,
-                        org.codehaus.mojo:native-maven-plugin:link
-                    </compile>
-                    <process-test-resources>org.apache.maven.plugins:maven-resources-plugin:testResources</process-test-resources>
-                    <test-compile>org.apache.maven.plugins:maven-compiler-plugin:testCompile</test-compile>
-                    <test>org.apache.maven.plugins:maven-surefire-plugin:test</test>
-                    <package>org.codehaus.mojo:native-maven-plugin:inczip</package>
-                    <install>org.apache.maven.plugins:maven-install-plugin:install</install>
-                    <deploy>org.apache.maven.plugins:maven-deploy-plugin:deploy</deploy>
-                </phases>
-            </configuration>
         </component>
 
         <component>
@@ -349,23 +177,6 @@ limitations under the License.
             <role>org.apache.maven.lifecycle.mapping.LifecycleMapping</role>
             <role-hint>uexe</role-hint>
             <implementation>org.apache.maven.lifecycle.mapping.DefaultLifecycleMapping</implementation>
-            <configuration>
-                <phases>
-                    <initialize>org.codehaus.mojo:native-maven-plugin:initialize</initialize>
-                    <generate-sources>org.codehaus.mojo:native-maven-plugin:unzipinc</generate-sources>
-                    <process-sources></process-sources>
-                    <compile>
-                        org.codehaus.mojo:native-maven-plugin:compile,
-                        org.codehaus.mojo:native-maven-plugin:link
-                    </compile>
-                    <process-test-resources>org.apache.maven.plugins:maven-resources-plugin:testResources</process-test-resources>
-                    <test-compile>org.apache.maven.plugins:maven-compiler-plugin:testCompile</test-compile>
-                    <test>org.apache.maven.plugins:maven-surefire-plugin:test</test>
-                    <package></package>
-                    <install>org.apache.maven.plugins:maven-install-plugin:install</install>
-                    <deploy>org.apache.maven.plugins:maven-deploy-plugin:deploy</deploy>
-                </phases>
-            </configuration>
         </component>
 
         <component>

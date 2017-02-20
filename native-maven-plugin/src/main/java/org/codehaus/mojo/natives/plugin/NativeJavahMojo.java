@@ -135,12 +135,6 @@ public class NativeJavahMojo
     private boolean attach;
 
     /**
-     * Classifier name when install/deploy generated includes file. See ${attach} for details
-     */
-    @Parameter(defaultValue = "javah")
-    private String classifier;
-
-    /**
      * Archive file to bundle all generated include files if enable by ${attach}
      * @since 1.0-alpha-8
      */

@@ -77,11 +77,10 @@ public abstract class AbstractNativeMojo
     
     /**
      * Option to define a classifier, useful to install/deploy debug artifacts
-     *
-     * @parameter
      * @since 1.0-alpha-10
      */
-    protected String classifier = null;
+    @Parameter
+    protected String classifier;
 
     protected static String[] removeEmptyOptions( List args )
     {
