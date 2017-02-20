@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.apache.maven.plugin.testing.AbstractMojoTestCase;
+import org.apache.maven.plugin.testing.stubs.ArtifactStub;
 import org.codehaus.mojo.natives.compiler.CompilerConfiguration;
 
 public class NativeCompileMojoTest
@@ -30,6 +31,7 @@ public class NativeCompileMojoTest
 
         // simulate extra path to be added into includePath
         mojo.getProject().addCompileSourceRoot( "dummy" );
+        mojo.getProject().setArtifact( new ArtifactStub());
         // until the maven project stub is fixed
         // mojo.getProject().addCompileSourceRoot( "target/javah" );
 
@@ -96,6 +98,7 @@ public class NativeCompileMojoTest
         assertNotNull( mojo );
 
         mojo.setPluginContext( new HashMap() );
+        mojo.getProject().setArtifact( new ArtifactStub());
 
         mojo.execute();
 

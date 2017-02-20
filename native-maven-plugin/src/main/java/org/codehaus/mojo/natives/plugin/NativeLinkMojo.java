@@ -29,7 +29,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.maven.artifact.Artifact;
-import org.apache.maven.artifact.DefaultArtifact;
 import org.apache.maven.artifact.factory.ArtifactFactory;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Component;
@@ -101,14 +100,6 @@ public class NativeLinkMojo
      */
     @Parameter
     private List linkingOrderLibs;
-
-    /**
-     * Comma separated extension type to be installed/deployed. Use this option to deploy library file produced by dll
-     * build on windows
-     * @since 1.0-alpha-2
-     */
-    @Parameter(defaultValue = "")
-    private String linkerSecondaryOutputExtensions;
 
     /**
      * Where to place the final packaging
@@ -202,12 +193,7 @@ public class NativeLinkMojo
             throw new MojoExecutionException( nbe.getMessage(), nbe );
         }
 
-        if ( this.attach )
-        {
-            this.attachPrimaryArtifact();
-
-            this.attachSecondaryArtifacts();
-        }
+        this.attachArtifact();
     }
 
     private LinkerConfiguration createLinkerConfiguration()
@@ -220,7 +206,7 @@ public class NativeLinkMojo
         config.setMiddleOptions( removeEmptyOptions( this.linkerMiddleOptions ) );
         config.setEndOptions( removeEmptyOptions( this.linkerEndOptions ) );
         config.setOutputDirectory( this.linkerOutputDirectory );
-        config.setOutputFileName( !StringUtils.isEmpty(classifier) ? this.linkerFinalName + "-" + classifier : this.linkerFinalName );
+        config.setOutputFileName( this.linkerFinalName );
         config.setOutputFileExtension( this.linkerFinalNameExt );
         config.setExternalLibDirectory( this.externalLibDirectory );
         config.setExternalLibFileNames( this.getLibFileNames() );
@@ -253,76 +239,14 @@ public class NativeLinkMojo
         return linker;
     }
 
-    /**
-     *
-     */
-    private void attachPrimaryArtifact()
+    private void attachArtifact()
     {
-        Artifact artifact = this.project.getArtifact();
-
-        if ( null == this.classifier )
-        {
-            artifact.setFile( new File( this.linkerOutputDirectory + "/" + this.project.getBuild().getFinalName() + "."
-                + this.project.getArtifact().getArtifactHandler().getExtension() ) );
-        }
-        else
-        {
-            // install primary artifact as a classifier
-
-            DefaultArtifact clone =
-                new DefaultArtifact( artifact.getGroupId(), artifact.getArtifactId(),
-                                     artifact.getVersionRange().cloneOf(), artifact.getScope(), artifact.getType(),
-                                     classifier, artifact.getArtifactHandler(), artifact.isOptional() );
-
-            clone.setRelease( artifact.isRelease() );
-            clone.setResolvedVersion( artifact.getVersion() );
-            clone.setResolved( artifact.isResolved() );
-            clone.setFile( artifact.getFile() );
-
-            if ( artifact.getAvailableVersions() != null )
-            {
-                clone.setAvailableVersions( new ArrayList( artifact.getAvailableVersions() ) );
-            }
-
-            clone.setBaseVersion( artifact.getBaseVersion() );
-            clone.setDependencyFilter( artifact.getDependencyFilter() );
-
-            if ( artifact.getDependencyTrail() != null )
-            {
-                clone.setDependencyTrail( new ArrayList( artifact.getDependencyTrail() ) );
-            }
-
-            clone.setDownloadUrl( artifact.getDownloadUrl() );
-            clone.setRepository( artifact.getRepository() );
-
-            clone.setFile( new File( this.linkerOutputDirectory + "/" + this.project.getBuild().getFinalName() + "."
-                + this.project.getArtifact().getArtifactHandler().getExtension() ) );
-
-            project.setArtifact( clone );
-        }
-    }
-
-    private void attachSecondaryArtifacts()
-    {
-        final String[] tokens;
-        if(this.linkerSecondaryOutputExtensions != null) {
-            tokens = StringUtils.split( this.linkerSecondaryOutputExtensions, "," );
-        } else {
-            tokens = new String[0];
-        }
-
-        for ( int i = 0; i < tokens.length; ++i )
-        {
-            // TODO: shouldn't need classifier
-            Artifact artifact =
-                artifactFactory.createArtifact( project.getGroupId(), project.getArtifactId(), project.getVersion(),
-                                                this.classifier, tokens[i].trim() );
-            artifact.setFile( new File( this.linkerOutputDirectory + "/" + this.project.getBuild().getFinalName() + "."
-                + tokens[i].trim() ) );
-
+        if ( this.attach ) {
+            Artifact artifact = artifactFactory.createArtifact( project.getGroupId(), linkerFinalName, project.getVersion(),
+                                 this.project.getArtifact().getClassifier(), this.project.getArtifact().getType() );
+            artifact.setFile( new File( this.linkerOutputDirectory + "/" + linkerFinalName + "." + linkerFinalNameExt ) );
             project.addAttachedArtifact( artifact );
         }
-
     }
 
     private List getLibFileNames()

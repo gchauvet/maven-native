@@ -75,13 +75,6 @@ public abstract class AbstractNativeMojo
     @Parameter(defaultValue = "${project.build.directory}/native/include")
     protected File dependencyIncludeDirectory;
     
-    /**
-     * Option to define a classifier, useful to install/deploy debug artifacts
-     * @since 1.0-alpha-10
-     */
-    @Parameter
-    protected String classifier;
-
     protected static String[] removeEmptyOptions( List args )
     {
         return NativeMojoUtils.trimParams( args );

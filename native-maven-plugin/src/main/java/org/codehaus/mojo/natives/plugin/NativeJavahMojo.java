@@ -50,7 +50,6 @@ import org.codehaus.mojo.natives.manager.NoSuchNativeProviderException;
 import org.codehaus.plexus.archiver.util.DefaultFileSet;
 import org.codehaus.plexus.archiver.zip.ZipArchiver;
 import org.codehaus.plexus.util.FileUtils;
-import org.codehaus.plexus.util.StringUtils;
 
 /**
  * Generate JNI include files based on a set of class names
@@ -226,14 +225,7 @@ public class NativeJavahMojo
             archiver.setDestFile( this.incZipFile );
             archiver.createArchive();
 
-            if ( StringUtils.isBlank( this.classifier ) )
-            {
-                projectHelper.attachArtifact( this.project, INCZIP_TYPE, null, this.incZipFile );
-            }
-            else
-            {
-                projectHelper.attachArtifact( this.project, INCZIP_TYPE, this.classifier, this.incZipFile );
-            }
+            projectHelper.attachArtifact( this.project, INCZIP_TYPE, this.project.getArtifact().getClassifier(), this.incZipFile );
         }
         catch ( Exception e )
         {
