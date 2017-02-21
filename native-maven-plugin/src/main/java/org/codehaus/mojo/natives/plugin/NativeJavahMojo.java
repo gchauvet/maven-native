@@ -128,19 +128,6 @@ public class NativeJavahMojo
     private boolean javahVerbose;
 
     /**
-     * Archive all generated include files and deploy as an inczip
-     */
-    @Parameter(defaultValue = "false")
-    private boolean attach;
-
-    /**
-     * Archive file to bundle all generated include files if enable by ${attach}
-     * @since 1.0-alpha-8
-     */
-    @Parameter(defaultValue = "${project.build.directory}/${project.build.finalName}.inczip", required = true)
-    private File incZipFile;
-
-    /**
      * Set CLASSPATH env variable instead of using -classpath command-line argument. Use this option to allow large
      * number of jars in classpath due to command line size limit under Windows
      * @since 1.0-alpha-9
@@ -198,10 +185,6 @@ public class NativeJavahMojo
                 this.getJavah().compile( config );
             }
 
-            if ( this.attach )
-            {
-                attachGeneratedIncludeFilesAsIncZip();
-            }
         }
         catch ( NativeBuildException e )
         {
@@ -210,27 +193,6 @@ public class NativeJavahMojo
 
         this.project.addCompileSourceRoot( this.javahOutputDirectory.getAbsolutePath() );
 
-    }
-
-    private void attachGeneratedIncludeFilesAsIncZip()
-        throws MojoExecutionException
-    {
-        try
-        {
-            ZipArchiver archiver = new ZipArchiver();
-            DefaultFileSet fileSet = new DefaultFileSet();
-            fileSet.setUsingDefaultExcludes( true );
-            fileSet.setDirectory( javahOutputDirectory );
-            archiver.addFileSet( fileSet );
-            archiver.setDestFile( this.incZipFile );
-            archiver.createArchive();
-
-            projectHelper.attachArtifact( this.project, INCZIP_TYPE, this.project.getArtifact().getClassifier(), this.incZipFile );
-        }
-        catch ( Exception e )
-        {
-            throw new MojoExecutionException( "Unable to archive/deploy generated include files", e );
-        }
     }
 
     private Javah getJavah()

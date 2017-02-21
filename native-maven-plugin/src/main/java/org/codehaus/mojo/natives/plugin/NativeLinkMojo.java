@@ -24,6 +24,7 @@ package org.codehaus.mojo.natives.plugin;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -129,7 +130,7 @@ public class NativeLinkMojo
      */
     @Component
     private LinkerManager manager;
-
+    
     /**
      * Internal
      * @since 1.0-alpha-2
@@ -143,14 +144,6 @@ public class NativeLinkMojo
      */
     @Parameter(defaultValue = "${project.build.directory}/lib", required = true)
     private File externalLibDirectory;
-
-    /**
-     * Attach the linker's outputs to maven project be installed/deployed. Turn this off if you have other mean of
-     * deployment, for example using maven-assembly-plugin to deploy your own bundle
-     * @since 1.0-alpha-2
-     */
-    @Parameter(defaultValue = "true")
-    private boolean attach;
 
     /**
      * For project with lots of object files on windows, turn this flag to resolve Windows commandline length limit
@@ -192,8 +185,6 @@ public class NativeLinkMojo
         {
             throw new MojoExecutionException( nbe.getMessage(), nbe );
         }
-
-        this.attachArtifact();
     }
 
     private LinkerConfiguration createLinkerConfiguration()
@@ -239,20 +230,11 @@ public class NativeLinkMojo
         return linker;
     }
 
-    private void attachArtifact()
-    {
-        if ( this.attach ) {
-            Artifact artifact = artifactFactory.createArtifact( project.getGroupId(), linkerFinalName, project.getVersion(),
-                                 this.project.getArtifact().getClassifier(), this.project.getArtifact().getType() );
-            artifact.setFile( new File( this.linkerOutputDirectory + "/" + linkerFinalName + "." + linkerFinalNameExt ) );
-            project.addAttachedArtifact( artifact );
-        }
-    }
-
     private List getLibFileNames()
         throws MojoExecutionException
     {
         List libList = new ArrayList();
+        final List scopes = Arrays.asList("provided", "test", "system");
 
         Set artifacts = this.project.getArtifacts();
 
@@ -260,7 +242,7 @@ public class NativeLinkMojo
         {
             Artifact artifact = (Artifact) iter.next();
 
-            if ( INCZIP_TYPE.equals( artifact.getType() ) )
+            if ( INCZIP_TYPE.equals( artifact.getType() ) || scopes.contains( artifact.getScope()) )
             {
                 continue;
             }
