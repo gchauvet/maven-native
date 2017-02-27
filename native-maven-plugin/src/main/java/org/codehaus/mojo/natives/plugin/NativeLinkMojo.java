@@ -132,13 +132,6 @@ public class NativeLinkMojo
     private LinkerManager manager;
     
     /**
-     * Internal
-     * @since 1.0-alpha-2
-     */
-    @Component
-    private ArtifactFactory artifactFactory;
-
-    /**
      * Dependent libraries with version + classifier removed are copied to this directory to be linked to the build
      * artifact
      */
